@@ -1,0 +1,95 @@
+(gdb) b MPI_Abort
+Function "MPI_Abort" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) y
+Breakpoint 1 (MPI_Abort) pending.
+(gdb) r
+Starting program: /pfs/data5/home/kit/agw/qz9211/projects/moose/modules/porous_flow/porous_flow-dbg -i reservoir_main.i
+Missing separate debuginfos, use: yum debuginfo-install glibc-2.28-151.el8.x86_64
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+warning: File "/pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/lib64/libstdc++.so.6.0.28-gdb.py" auto-loading has been declined by your `auto-load safe-path' set to "$debugdir:$datadir/auto-load:/usr/lib/golang/src/pkg/runtime/runtime-gdb.py".
+To enable execution of this file add
+        add-auto-load-safe-path /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/lib64/libstdc++.so.6.0.28-gdb.py
+line to your configuration file "/home/kit/agw/qz9211/.gdbinit".
+To completely disable this security protection add
+        set auto-load safe-path /
+line to your configuration file "/home/kit/agw/qz9211/.gdbinit".
+For more information about this security protection see the
+"Auto-loading safe path" section in the GDB manual.  E.g., run from the shell:
+        info "(gdb)Auto-loading safe path"
+[New Thread 0x15553c558700 (LWP 835716)]
+
+
+*** Warning ***
+Unable to find extern "C" method "MoskitoApp__registerApps" in library: /home/kit/agw/qz9211/moose-compilers/mpich-3.3/lib/libmpi.so.12.
+This doesn't necessarily indicate an error condition unless you believe that the method should exist in that library.
+
+
+*** Warning ***
+Unable to find extern "C" method "MoskitoApp__registerApps" in library: /home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/lib/../lib64/libstdc++.so.6.
+This doesn't necessarily indicate an error condition unless you believe that the method should exist in that library.
+
+[New Thread 0x15553b8cc700 (LWP 836050)]
+pipe_sub0: The following total 2 aux variables:
+pipe_sub0:   density
+pipe_sub0:   well_velocity
+pipe_sub0: are added for automatic output by MaterialOutputAction.
+Setting Up
+  Finished Initializing                                                                  [  5.36 s] [    9 MB]
+Finished Setting Up                                                                      [ 10.93 s] [   71 MB]
+Framework Information:
+MOOSE Version:           git commit 7b616c514c on 2022-12-07
+LibMesh Version:         3f05f40f4a45060c1fd07281f8869a4667086291
+PETSc Version:           3.16.6
+SLEPc Version:           3.16.2
+Current Time:            Wed Mar  8 17:26:36 2023
+Executable Timestamp:    Wed Mar  8 15:49:15 2023
+
+Parallelism:
+  Num Processors:          1
+  Num Threads:             1
+
+Mesh:
+  Parallel Type:           replicated
+  Mesh Dimension:          3
+  Spatial Dimension:       3
+  Nodes:                   5573
+  Elems:                   25352
+  Num Subdomains:          1
+
+Nonlinear System:
+  Num DOFs:                11146
+  Num Local DOFs:          11146
+  Variables:               { "porepressure" "temperature" }
+  Finite Element Types:    "LAGRANGE"
+  Approximation Orders:    "FIRST"
+
+Execution Information:
+  Executioner:             Transient
+  TimeStepper:             ConstantDT
+  Solver Mode:             NEWTON
+  PETSc Preconditioner:    asm
+  MOOSE Preconditioner:    SMP
+
+
+    Finished Projecting Initial Solutions                                                [  6.42 s] [    1 MB]
+
+Thread 1 "porous_flow-dbg" received signal SIGSEGV, Segmentation fault.
+0x0000155554ac960a in PorousFlowMaterial::sizeNodalProperties (this=0x1caed60) at /home/kit/agw/qz9211/projects/moose/modules/porous_flow/src/materials/PorousFlowMaterial.C:147
+147         props_old[prop_id]->resize(new_size);
+Missing separate debuginfos, use: yum debuginfo-install keyutils-libs-1.5.10-6.el8.x86_64 krb5-libs-1.18.2-9.el8_4.x86_64 libX11-1.6.8-4.el8.x86_64 libXau-1.0.9-3.el8.x86_64 libblkid-2.32.1-27.el8.x86_64 libcom_err-1.45.6-2.el8_4.x86_64 libmount-2.32.1-27.el8.x86_64 libpciaccess-0.14-1.el8.x86_64 libselinux-2.9-5.el8.x86_64 libtirpc-1.1.4-4.el8.x86_64 libunwind-1.3.1-3.el8.x86_64 libuuid-2.32.1-27.el8.x86_64 libxcb-1.13.1-1.el8.x86_64 libxml2-2.9.7-9.el8_4.2.x86_64 openssl-libs-1.1.1g-16.el8_4.x86_64 pcre2-10.32-2.el8.x86_64 systemd-libs-239-45.el8_4.15.x86_64 xz-libs-5.2.4-4.el8_4.x86_64 zlib-1.2.11-18.el8_4.x86_64
+(gdb) bt
+#0  0x0000155554ac960a in PorousFlowMaterial::sizeNodalProperties (this=0x1caed60) at /home/kit/agw/qz9211/projects/moose/modules/porous_flow/src/materials/PorousFlowMaterial.C:147
+#1  0x0000155554ac91a1 in PorousFlowMaterial::initStatefulProperties (this=0x1caed60, n_points=5) at /home/kit/agw/qz9211/projects/moose/modules/porous_flow/src/materials/PorousFlowMaterial.C:65
+#2  0x000015554fd6a64f in MaterialPropertyStorage::initStatefulProps (this=0x1411b30, material_data=..., mats=..., n_qpoints=5, elem=..., side=0)
+    at /home/kit/agw/qz9211/projects/moose/framework/src/materials/MaterialPropertyStorage.C:256
+#3  0x000015554f7268b0 in ComputeMaterialsObjectThread::onElement (this=0x7fffffffae80, elem=0xcbd990) at /home/kit/agw/qz9211/projects/moose/framework/src/loops/ComputeMaterialsObjectThread.C:113
+#4  0x000015554ed106fe in ThreadedElementLoopBase<libMesh::StoredRange<libMesh::MeshBase::const_element_iterator, libMesh::Elem const*> >::operator() (this=0x7fffffffae80, range=..., bypass_threading=false)
+    at /home/kit/agw/qz9211/projects/moose/framework/build/header_symlinks/ThreadedElementLoopBase.h:226
+#5  0x000015554ff07ecf in libMesh::Threads::parallel_reduce<libMesh::StoredRange<libMesh::MeshBase::const_element_iterator, libMesh::Elem const*>, ComputeMaterialsObjectThread> (range=..., body=...)
+    at /home/kit/agw/qz9211/projects/moose/scripts/../libmesh/installed/include/libmesh/threads_pthread.h:380
+#6  0x000015554feab660 in FEProblemBase::initialSetup (this=0x140dae0) at /home/kit/agw/qz9211/projects/moose/framework/src/problems/FEProblemBase.C:896
+#7  0x000015554f4d0a6b in Transient::init (this=0x1557ba0) at /home/kit/agw/qz9211/projects/moose/framework/src/executioners/Transient.C:249
+#8  0x000015555029d198 in MooseApp::executeExecutioner (this=0x8305f0) at /home/kit/agw/qz9211/projects/moose/framework/src/base/MooseApp.C:1095
+#9  0x000015555029fdd2 in MooseApp::run (this=0x8305f0) at /home/kit/agw/qz9211/projects/moose/framework/src/base/MooseApp.C:1402
+#10 0x000000000040c79e in main (argc=3, argv=0x7fffffffd438) at /home/kit/agw/qz9211/projects/moose/modules/porous_flow/src/main.C:33
