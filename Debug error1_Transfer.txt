@@ -1,0 +1,99 @@
+(gdb) b MPI_Abort
+Function "MPI_Abort" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) y
+Breakpoint 1 (MPI_Abort) pending.
+(gdb) r
+Starting program: /pfs/data5/home/kit/agw/qz9211/projects/moose/modules/porous_f                                                                                                                                                             low/porous_flow-dbg -i reservoir_main.i
+Missing separate debuginfos, use: yum debuginfo-install glibc-2.28-151.el8.x86_6                                                                                                                                                             4
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+warning: File "/pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/lib64/libstdc++.so.6.0.28-gdb.py" auto-loading has been declined by your `auto-load safe-path' set to "$debugdir:$datadir/auto-load:/usr/lib/golang/src/pkg/runtime/runtime-gdb.py".
+To enable execution of this file add
+        add-auto-load-safe-path /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/lib64/libstdc++.so.6.0.28-gdb.py
+line to your configuration file "/home/kit/agw/qz9211/.gdbinit".
+To completely disable this security protection add
+        set auto-load safe-path /
+line to your configuration file "/home/kit/agw/qz9211/.gdbinit".
+For more information about this security protection see the
+"Auto-loading safe path" section in the GDB manual.  E.g., run from the shell:
+        info "(gdb)Auto-loading safe path"
+[New Thread 0x15553c558700 (LWP 718848)]
+
+
+*** Warning ***
+Unable to find extern "C" method "MoskitoApp__registerApps" in library: /home/kit/agw/qz9211/moose-compilers/mpich-3.3/lib/libmpi.so.12.
+This doesn't necessarily indicate an error condition unless you believe that the method should exist in that library.
+
+
+[New Thread 0x15553b8cc700 (LWP 719029)]
+pipe_sub0: The following total 2 aux variables:
+pipe_sub0:   density
+pipe_sub0:   well_velocity
+pipe_sub0: are added for automatic output by MaterialOutputAction.
+
+
+Assertion `i < _current.size()' failed
+Access out of bounds in MultiMooseEnum (i: 0 size: 0)
+at /home/kit/agw/qz9211/projects/moose/framework/src/utils/MultiMooseEnum.C, line 168
+Stack frames: 25
+0: libMesh::print_trace(std::ostream&)
+1: MultiMooseEnum::operator[][abi:cxx11](unsigned int) const
+2: MultiAppTransfer::MultiAppTransfer(InputParameters const&)
+3: MultiAppPostprocessorTransfer::MultiAppPostprocessorTransfer(InputParameters const&)
+4: void __gnu_cxx::new_allocator<MultiAppPostprocessorTransfer>::construct<MultiAppPostprocessorTransfer, InputParameters const&>(MultiAppPostprocessorTransfer*, InputParameters const&)
+5: void std::allocator_traits<std::allocator<MultiAppPostprocessorTransfer> >::construct<MultiAppPostprocessorTransfer, InputParameters const&>(std::allocator<MultiAppPostprocessorTransfer>&, MultiAppPostprocessorTransfer*, InputParameters const&)
+6: std::_Sp_counted_ptr_inplace<MultiAppPostprocessorTransfer, std::allocator<MultiAppPostprocessorTransfer>, (__gnu_cxx::_Lock_policy)2>::_Sp_counted_ptr_inplace<InputParameters const&>(std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&)
+7: std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<MultiAppPostprocessorTransfer, std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&>(MultiAppPostprocessorTransfer*&, std::_Sp_alloc_shared_tag<std::allocator<MultiAppPostprocessorTransfer> >, InputParameters const&)
+8: std::__shared_ptr<MultiAppPostprocessorTransfer, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&>(std::_Sp_alloc_shared_tag<std::allocator<MultiAppPostprocessorTransfer> >, InputParameters const&)
+9: std::shared_ptr<MultiAppPostprocessorTransfer>::shared_ptr<std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&>(std::_Sp_alloc_shared_tag<std::allocator<MultiAppPostprocessorTransfer> >, InputParameters const&)
+10: std::shared_ptr<MultiAppPostprocessorTransfer> std::allocate_shared<MultiAppPostprocessorTransfer, std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&>(std::allocator<MultiAppPostprocessorTransfer> const&, InputParameters const&)
+11: std::shared_ptr<MultiAppPostprocessorTransfer> std::make_shared<MultiAppPostprocessorTransfer, InputParameters const&>(InputParameters const&)
+12: std::shared_ptr<MooseObject> Registry::build<MultiAppPostprocessorTransfer, MooseObject>(InputParameters const&)
+13: Factory::create(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, InputParameters const&, unsigned int, bool)
+14: std::shared_ptr<Transfer> Factory::create<Transfer>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, InputParameters const&, unsigned int)
+15: FEProblemBase::addTransfer(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, InputParameters&)
+16: AddTransferAction::act()
+17: Action::timedAct()
+18: ActionWarehouse::executeActionsWithAction(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+19: ActionWarehouse::executeAllActions()
+20: MooseApp::runInputFile()
+21: MooseApp::run()
+22: main
+23: __libc_start_main
+24: /pfs/data5/home/kit/agw/qz9211/projects/moose/modules/porous_flow/porous_flow-dbg() [0x40c5ad]
+[0] /home/kit/agw/qz9211/projects/moose/framework/src/utils/MultiMooseEnum.C, line 168, compiled Jan  3 2023 at 16:58:38
+
+Thread 1 "porous_flow-dbg" hit Breakpoint 1, 0x00001555420d19a0 in PMPI_Abort
+    () from /home/kit/agw/qz9211/moose-compilers/mpich-3.3/lib/libmpi.so.12
+Missing separate debuginfos, use: yum debuginfo-install keyutils-libs-1.5.10-6.el8.x86_64 krb5-libs-1.18.2-9.el8_4.x86_64 libX11-1.6.8-4.el8.x86_64 libXau-1.0.9-3.el8.x86_64 libblkid-2.32.1-27.el8.x86_64 libcom_err-1.45.6-2.el8_4.x86_64 libmount-2.32.1-27.el8.x86_64 libpciaccess-0.14-1.el8.x86_64 libselinux-2.9-5.el8.x86_64 libtirpc-1.1.4-4.el8.x86_64 libunwind-1.3.1-3.el8.x86_64 libuuid-2.32.1-27.el8.x86_64 libxcb-1.13.1-1.el8.x86_64 libxml2-2.9.7-9.el8_4.2.x86_64 openssl-libs-1.1.1g-16.el8_4.x86_64 pcre2-10.32-2.el8.x86_64 systemd-libs-239-45.el8_4.15.x86_64 xz-libs-5.2.4-4.el8_4.x86_64 zlib-1.2.11-18.el8_4.x86_64
+(gdb) bt
+#0  0x00001555420d19a0 in PMPI_Abort () from /home/kit/agw/qz9211/moose-compilers/mpich-3.3/lib/libmpi.so.12
+#1  0x0000155550262f72 in MultiMooseEnum::operator[][abi:cxx11](unsigned int) const (this=0x15db580, i=0) at /home/kit/agw/qz9211/projects/moose/framework/src/utils/MultiMooseEnum.C:168
+#2  0x000015554eb88b2d in MultiAppTransfer::MultiAppTransfer (this=0x15db270, parameters=...) at /home/kit/agw/qz9211/projects/moose/framework/src/transfers/MultiAppTransfer.C:135
+#3  0x000015554eb7be65 in MultiAppPostprocessorTransfer::MultiAppPostprocessorTransfer (this=0x15db270, parameters=...) at /home/kit/agw/qz9211/projects/moose/framework/src/transfers/MultiAppPostprocessorTransfer.C:48
+#4  0x000015554ec83c77 in __gnu_cxx::new_allocator<MultiAppPostprocessorTransfer>::construct<MultiAppPostprocessorTransfer, InputParameters const&> (this=0x7fffffffbbff, __p=0x15db270)
+    at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/ext/new_allocator.h:156
+#5  0x000015554ec7f234 in std::allocator_traits<std::allocator<MultiAppPostprocessorTransfer> >::construct<MultiAppPostprocessorTransfer, InputParameters const&> (__a=..., __p=0x15db270)
+    at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/bits/alloc_traits.h:512
+#6  0x000015554ec770cd in std::_Sp_counted_ptr_inplace<MultiAppPostprocessorTransfer, std::allocator<MultiAppPostprocessorTransfer>, (__gnu_cxx::_Lock_policy)2>::_Sp_counted_ptr_inplace<InputParameters const&> (this=0x15db260, __a=...)
+    at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/bits/shared_ptr_base.h:551
+#7  0x000015554ec6cdbd in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<MultiAppPostprocessorTransfer, std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&> (this=0x7fffffffbd48,
+    __p=@0x7fffffffbd40: 0x0, __a=...) at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/bits/shared_ptr_base.h:682
+#8  0x000015554ec606e0 in std::__shared_ptr<MultiAppPostprocessorTransfer, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&> (this=0x7fffffffbd40, __tag=...)
+    at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/bits/shared_ptr_base.h:1376
+#9  0x000015554ec5127b in std::shared_ptr<MultiAppPostprocessorTransfer>::shared_ptr<std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&> (this=0x7fffffffbd40, __tag=...)
+    at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/bits/shared_ptr.h:408
+#10 0x000015554ec3aa53 in std::allocate_shared<MultiAppPostprocessorTransfer, std::allocator<MultiAppPostprocessorTransfer>, InputParameters const&> (__a=...)
+    at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/bits/shared_ptr.h:862
+#11 0x000015554ec16fb1 in std::make_shared<MultiAppPostprocessorTransfer, InputParameters const&> () at /pfs/data5/home/kit/agw/qz9211/moose-compilers/gcc-10.4.0/include/c++/10.4.0/bits/shared_ptr.h:878
+#12 0x000015554ebebd60 in Registry::build<MultiAppPostprocessorTransfer, MooseObject> (parameters=...) at /home/kit/agw/qz9211/projects/moose/framework/build/header_symlinks/Registry.h:234
+#13 0x00001555502731ef in Factory::create (this=0x831610, obj_name=..., name=..., parameters=..., tid=0, print_deprecated=false) at /home/kit/agw/qz9211/projects/moose/framework/src/base/Factory.C:125
+#14 0x000015554ff1714c in Factory::create<Transfer> (this=0x831610, obj_name=..., name=..., parameters=..., tid=0) at /home/kit/agw/qz9211/projects/moose/framework/build/header_symlinks/Factory.h:296
+#15 0x000015554fecfe9d in FEProblemBase::addTransfer (this=0x141a780, transfer_name=..., name=..., parameters=...) at /home/kit/agw/qz9211/projects/moose/framework/src/problems/FEProblemBase.C:4777
+#16 0x000015554fccc15b in AddTransferAction::act (this=0xbdbf90) at /home/kit/agw/qz9211/projects/moose/framework/src/actions/AddTransferAction.C:28
+#17 0x000015554fcbbe97 in Action::timedAct (this=0xbdbf90) at /home/kit/agw/qz9211/projects/moose/framework/src/actions/Action.C:97
+#18 0x000015554fcc020a in ActionWarehouse::executeActionsWithAction (this=0x830da8, task=...) at /home/kit/agw/qz9211/projects/moose/framework/src/actions/ActionWarehouse.C:386
+#19 0x000015554fcbfd78 in ActionWarehouse::executeAllActions (this=0x830da8) at /home/kit/agw/qz9211/projects/moose/framework/src/actions/ActionWarehouse.C:346
+#20 0x000015555029c714 in MooseApp::runInputFile (this=0x830790) at /home/kit/agw/qz9211/projects/moose/framework/src/base/MooseApp.C:1042
+#21 0x000015555029fa63 in MooseApp::run (this=0x830790) at /home/kit/agw/qz9211/projects/moose/framework/src/base/MooseApp.C:1392
+#22 0x000000000040c79e in main (argc=3, argv=0x7fffffffd438) at /home/kit/agw/qz9211/projects/moose/modules/porous_flow/src/main.C:33
